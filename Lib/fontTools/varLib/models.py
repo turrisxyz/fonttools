@@ -379,9 +379,9 @@ class VariationModel(object):
 			out.append(round(delta))
 		return out
 
-	def getDeltasAndSupports(self, items, *, round=noRound):
+	def getDeltasAndSupports(self, items, **kwargs):
 		model, items = self.getSubModel(items)
-		return model.getDeltas(items, round=round), model.supports
+		return model.getDeltas(items, **kwargs), model.supports
 
 	def getScalars(self, loc):
 		return [supportScalar(loc, support) for support in self.supports]
@@ -403,12 +403,12 @@ class VariationModel(object):
 		scalars = self.getScalars(loc)
 		return self.interpolateFromDeltasAndScalars(deltas, scalars)
 
-	def interpolateFromMasters(self, loc, masterValues, *, round=noRound):
-		deltas = self.getDeltas(masterValues, round=round)
+	def interpolateFromMasters(self, loc, masterValues, **kwargs):
+		deltas = self.getDeltas(masterValues, **kwargs)
 		return self.interpolateFromDeltas(loc, deltas)
 
-	def interpolateFromMastersAndScalars(self, masterValues, scalars, *, round=noRound):
-		deltas = self.getDeltas(masterValues, round=round)
+	def interpolateFromMastersAndScalars(self, masterValues, scalars, **kwargs):
+		deltas = self.getDeltas(masterValues, **kwargs)
 		return self.interpolateFromDeltasAndScalars(deltas, scalars)
 
 
