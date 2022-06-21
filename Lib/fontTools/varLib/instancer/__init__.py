@@ -429,7 +429,7 @@ def setMvarDeltas(varfont, deltas):
         if mvarTag not in MVAR_ENTRIES:
             continue
         tableTag, itemName = MVAR_ENTRIES[mvarTag]
-        delta = deltas[rec.VarIdx]
+        delta = deltas.get(rec.VarIdx, 0)
         if delta != 0:
             setattr(
                 varfont[tableTag],
