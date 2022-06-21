@@ -37,12 +37,14 @@ class OnlineVarStoreBuilder(object):
 		self._cache = {}
 		self._data = None
 
-	def finish(self, optimize=True):
+	def finish(self, optimize=True, empty=True):
 		self._regionList.RegionCount = len(self._regionList.Region)
 		self._store.VarDataCount = len(self._store.VarData)
 		for data in self._store.VarData:
 			data.ItemCount = len(data.Item)
 			data.calculateNumShorts(optimize=optimize)
+		if empty is None and not self._store.VarDataCount:
+			return None
 		return self._store
 
 	def _add_VarData(self):
